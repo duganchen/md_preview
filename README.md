@@ -32,4 +32,8 @@ Suggestions include:
 
 The formats option ("-f") is exactly the same as the corresponding option in pandoc ("-f"), and is directly translated to it.
 
+In the following screenshot, I opened a split under vim, switched to it, and did:
+
+	./md_preview -h README.md
+
 ![screenshot](screenshot.png)
