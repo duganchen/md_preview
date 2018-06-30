@@ -46,8 +46,6 @@ DIRECTION="-v"
 TEMP=$(mktemp -d)
 MD=$(realpath "$1")
 
-# Note the "gfm", which means to hardcode for GitHub-flavored Markdown.
-
 pandoc -f "$FORMAT" -t html -o "$TEMP/preview.html" -s -c "$CSS" --quiet "$MD"
 
 mkfifo "$TEMP/pipe.fifo"
