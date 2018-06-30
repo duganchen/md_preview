@@ -1,4 +1,4 @@
-# BASH Script to Preview Markdown File In TMux
+# BASH Script to Preview Markdown File When You're In TMux
 
 This is a BASH script to live-preview Markdown files.
 
