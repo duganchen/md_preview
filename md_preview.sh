@@ -43,7 +43,7 @@ done
 shift $((OPTIND - 1))
 
 if ! [ -f "$1" ] ; then
-  echo "Please specify a file to preview"  >&
+  echo "Please specify a file to preview"  >&22
   exit 1
 fi
 
