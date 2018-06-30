@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+function preview_help {
+cat <<-EOF
+md_preview [OPTIONS] [FILE]
+Previews the Markdown FILE.
+  -f FORMAT
+  -c URL
+  -h
+EOF
+}
+
 if [[ "$TMUX_PANE" == "" ]]; then
   echo "You can only md_preview inside tmux" >&2
   exit 1
@@ -36,14 +46,29 @@ while getopts ":c:f:h" opt; do
     h)
       DIRECTION="-h"
       ;;
+    \?)
+      preview_help
+      exit 1
+      ;;
   esac
 
 done
 
 shift $((OPTIND - 1))
 
+if [[ "$1" == "" ]]; then
+  preview_help
+  exit 1
+fi
+
 if ! [ -f "$1" ] ; then
-  echo "Please specify a file to preview"  >&22
+  echo "Please specify a Markdown file to preview"  >&2
+  exit 1
+fi
+
+# This sanity check at least works on slackware-current.
+if [[ $(file "$1" | awk -F ': ' '{print $2}') != "ASCII text" ]]; then
+  echo "$1 is not a Markdown file."  >&2
   exit 1
 fi
 
