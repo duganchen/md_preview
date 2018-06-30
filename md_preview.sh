@@ -40,14 +40,15 @@ if ! [ -x "$(command -v pandoc)" ] ; then
 fi
 
 
+
 if ! [ -f "$1" ] ; then
   echo "Please specify a file to preview"  >&2
   exit 1
 fi
 
-CSS=https://rawgit.com/otsaloma/markdown-css/master/tufte.css
-FORMAT=gfm
-DIRECTION="-v"
+CSS=${CSS:-https://rawgit.com/otsaloma/markdown-css/master/tufte.css}
+FORMAT=${FORMAT:-gfm}
+DIRECTION=${DIRECTION:-"-v"}
 
 TEMP=$(mktemp -d)
 MD=$(realpath "$1")
