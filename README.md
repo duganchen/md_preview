@@ -1,11 +1,12 @@
 # BASH Script to Preview Markdown File In TMux
 
-This is a BASH script to live-preview Markdown files in tmux.
+This is a BASH script to live-preview Markdown files.
 
-It takes as a parameter the path to the Markdown file you want to preview. In your current tmux pane, it starts up a watcher
-for changes that file. It also opens another tmux pane with a live server to serve up a preview. In most cases, the preview
-should then automatically open in your web browser. The preview will update whenever the Markdown file changes on disk. When
-you're done, go to the file watcher and press "q". It will close both the watcher and the server.
+To you it, you need to be in tmux. It takes as a parameter the path to the Markdown file you want to preview. In your current
+tmux pane, it starts up a watcher for changes that file. It also opens another tmux pane with a live server to serve up a
+preview. In most cases, the preview should then automatically open in your web browser. The preview will update whenever the
+Markdown file changes on disk. When you're done, go to the file watcher and press "q". It will close both the watcher and the
+server.
 
 ## Requirements
 
