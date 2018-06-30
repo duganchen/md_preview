@@ -19,6 +19,11 @@
 # http://benjam.info/panam/
 # https://gist.github.com/killercup/5917178
 
+if [[ "$TMUX_PANE" == "" ]]; then
+  echo "You can only md_preview inside tmux"
+  exit 1
+fi
+
 TEMP=$(mktemp -d)
 MD=$(realpath "$1")
 
