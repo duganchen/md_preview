@@ -1,24 +1,5 @@
 #!/usr/bin/env bash
 
-# A Markdown previewer to use in TMUX.
-
-# This takes the path to the Markdown file you want to preview. In your current tmux pane, it starts up a watcher for changes
-# that file. It also opens another tmux pane with a live server to serve up a preview. In most cases, the preview should then
-# automatically open in your web browser. When you're done, go to the file watcher and press "q". It will close both the
-# watcher and the server.
-
-# This system uses the following:
-# * tmux (of course)
-# * "killercup"'s CSS (https://gist.github.com/killercup/5917178)
-# * entr (http://www.entrproject.org/)
-# * pandoc
-# * live-server (http://tapiov.net/live-server/)
-
-
-# Possible alternative CSS:
-# http://benjam.info/panam/
-# https://gist.github.com/killercup/5917178
-
 if [[ "$TMUX_PANE" == "" ]]; then
   echo "You can only md_preview inside tmux" >&2
   exit 1
@@ -62,7 +43,7 @@ done
 shift $((OPTIND - 1))
 
 if ! [ -f "$1" ] ; then
-  echo "Please specify a file to preview"  >&2
+  echo "Please specify a file to preview"  >&
   exit 1
 fi
 
