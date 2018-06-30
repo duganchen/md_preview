@@ -20,13 +20,14 @@ It requires the following:
 * [live-server](https://github.com/tapio/live-server) (to serve the automatically-updating preview)
 * [pandoc](https://pandoc.org/) (to convert the Markdown file to HTML)
 
-The CSS file, by default, is tufte, served from [otsaloma/markdown-css](https://github.com/otsaloma/markdown-css). Alternate
-stylesheets need to be served with the correct mimetypes. For gist and GitHub links, that means using
+The CSS file, by default, is tufte, from [otsaloma/markdown-css](https://github.com/otsaloma/markdown-css). Alternate
+stylesheets need to be served with the correct mimetype. For gist and GitHub links, that means using
 [RawGit](https://rawgit.com/) URLs.
 
 Suggestions include:
 
-* killercup's: [gist](https://gist.github.com/killercup/5917178) / [RawGit](https://rawgit.com/killercup/5917178/raw/8b9903f2d4cc0b2f572f80d2cf3e2380cd264948/pandoc.css)
+* killercup's: [gist](https://gist.github.com/killercup/5917178) /
+[RawGit](https://rawgit.com/killercup/5917178/raw/8b9903f2d4cc0b2f572f80d2cf3e2380cd264948/pandoc.css)
 * benjam's: [homepage](http://benjam.info/panam/) / [css](http://benjam.info/panam/styling.css)
 
 The formats option ("-f") is exactly the same as the corresponding option in pandoc ("-f"), and is directly translated to it.
