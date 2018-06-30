@@ -39,28 +39,44 @@ if ! [ -x "$(command -v pandoc)" ] ; then
   exit 1
 fi
 
+CSS=${CSS:-https://rawgit.com/otsaloma/markdown-css/master/tufte.css}
+FROM=${FROM:-gfm}
+DIRECTION=${DIRECTION:-"-v"}
 
+while getopts ":c:f:h" opt; do
+
+  case "$opt" in
+    c)
+      CSS="$OPTARG"
+      ;;
+    f)
+      FROM="$OPTARG"
+      ;;
+    h)
+      DIRECTION="-h"
+      ;;
+  esac
+
+done
+
+shift $((OPTIND - 1))
 
 if ! [ -f "$1" ] ; then
   echo "Please specify a file to preview"  >&2
   exit 1
 fi
 
-CSS=${CSS:-https://rawgit.com/otsaloma/markdown-css/master/tufte.css}
-FORMAT=${FORMAT:-gfm}
-DIRECTION=${DIRECTION:-"-v"}
-
 TEMP=$(mktemp -d)
 MD=$(realpath "$1")
 
-pandoc -f "$FORMAT" -t html -o "$TEMP/preview.html" -s -c "$CSS" --quiet "$MD"
+pandoc -f "$FROM" -t html -o "$TEMP/preview.html" -s -c "$CSS" --quiet "$MD"
 
 mkfifo "$TEMP/pipe.fifo"
 tmux split-window "$DIRECTION" \; send-keys "echo \$TMUX_PANE > $TEMP/pipe.fifo" Enter \; select-pane -t "$TMUX_PANE"
 SERVER_PANE=$(cat "$TEMP/pipe.fifo")
 tmux send-keys -t "$SERVER_PANE" "cd $TEMP ; live-server preview.html" Enter
 
-echo "$MD" | entr -s "pandoc -f $FORMAT -t html -o $TEMP/preview.html -s -c $CSS $TEMP/pandoc.css --quiet $MD"
+echo "$MD" | entr -s "pandoc -f $FROM -t html -o $TEMP/preview.html -s -c $CSS --quiet $MD"
 tmux kill-pane -t "$SERVER_PANE"
 rm -rf "$TEMP"
 
