@@ -20,7 +20,22 @@
 # https://gist.github.com/killercup/5917178
 
 if [[ "$TMUX_PANE" == "" ]]; then
-  echo "You can only md_preview inside tmux"
+  echo "You can only md_preview inside tmux" >&2
+  exit 1
+fi
+
+if ! [ -x "$(command -v live-server)" ] ; then
+  echo "Please install live-server"  >&2
+  exit 1
+fi
+
+if ! [ -x "$(command -v entr)" ] ; then
+  echo "Please install entr"  >&2
+  exit 1
+fi
+
+if ! [ -x "$(command -v pandoc)" ] ; then
+  echo "Please install pandoc"  >&2
   exit 1
 fi
 
