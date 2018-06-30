@@ -39,6 +39,12 @@ if ! [ -x "$(command -v pandoc)" ] ; then
   exit 1
 fi
 
+
+if ! [ -f "$1" ] ; then
+  echo "Please specify a file to preview"  >&2
+  exit 1
+fi
+
 CSS=https://rawgit.com/otsaloma/markdown-css/master/tufte.css
 FORMAT=gfm
 DIRECTION="-v"
