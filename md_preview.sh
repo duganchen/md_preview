@@ -39,21 +39,23 @@ if ! [ -x "$(command -v pandoc)" ] ; then
   exit 1
 fi
 
+CSS=https://rawgit.com/otsaloma/markdown-css/master/tufte.css
+FORMAT=gfm
+DIRECTION="-v"
+
 TEMP=$(mktemp -d)
 MD=$(realpath "$1")
 
 # Note the "gfm", which means to hardcode for GitHub-flavored Markdown.
 
-CSS=https://rawgit.com/otsaloma/markdown-css/master/tufte.css
-
-pandoc -f gfm -t html -o "$TEMP/preview.html" -s -c "$CSS" --quiet "$MD"
+pandoc -f "$FORMAT" -t html -o "$TEMP/preview.html" -s -c "$CSS" --quiet "$MD"
 
 mkfifo "$TEMP/pipe.fifo"
-tmux split-window \; send-keys "echo \$TMUX_PANE > $TEMP/pipe.fifo" Enter \; select-pane -t "$TMUX_PANE"
+tmux split-window "$DIRECTION" \; send-keys "echo \$TMUX_PANE > $TEMP/pipe.fifo" Enter \; select-pane -t "$TMUX_PANE"
 SERVER_PANE=$(cat "$TEMP/pipe.fifo")
 tmux send-keys -t "$SERVER_PANE" "cd $TEMP ; live-server preview.html" Enter
 
-echo "$MD" | entr -s "pandoc -f gfm -t html -o $TEMP/preview.html -s -c $CSS $TEMP/pandoc.css --quiet $MD"
+echo "$MD" | entr -s "pandoc -f $FORMAT -t html -o $TEMP/preview.html -s -c $CSS $TEMP/pandoc.css --quiet $MD"
 tmux kill-pane -t "$SERVER_PANE"
 rm -rf "$TEMP"
 
