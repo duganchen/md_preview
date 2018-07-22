@@ -14,8 +14,8 @@ It requires the following:
 
 * tmux (running)
 * [entr](https://github.com/tapio/live-server) (the file watcher)
-* [live-server](https://github.com/tapio/live-server) (to serve the automatically-updating preview)
 * [pandoc](https://pandoc.org/) (to convert the Markdown file to HTML)
+* [live-server](https://github.com/tapio/live-server) (to serve the automatically-updating preview)
 
 ## Options
 
