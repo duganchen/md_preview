@@ -67,7 +67,8 @@ if ! [ -f "$1" ] ; then
 fi
 
 # This sanity check at least works on slackware-current and OS X.
-if [[ $(file "$1" | awk -F ': ' '{print $2}') != "ASCII text"* ]]; then
+FILETYPE=$(file "$1" | awk -F ': ' '{print $2}')
+if [[  "$FILETYPE" != "ASCII text"* && $FILETYPE != "empty" ]]; then
   echo "$1 is not a Markdown file."  >&2
   exit 1
 fi
