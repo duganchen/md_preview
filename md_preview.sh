@@ -15,18 +15,18 @@ if [[ "$TMUX_PANE" == "" ]]; then
   exit 1
 fi
 
-if ! [ -x "$(command -v live-server)" ] ; then
-  echo "Please install live-server"  >&2
-  exit 1
-fi
-
 if ! [ -x "$(command -v entr)" ] ; then
-  echo "Please install entr"  >&2
+  echo "entr not found"  >&2
   exit 1
 fi
 
 if ! [ -x "$(command -v pandoc)" ] ; then
-  echo "Please install pandoc"  >&2
+  echo "pandoc not found"  >&2
+  exit 1
+fi
+
+if ! [ -x "$(command -v live-server)" ] ; then
+  echo "live-server not found"  >&2
   exit 1
 fi
 
